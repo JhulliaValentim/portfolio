@@ -5,16 +5,18 @@ backend/node_modules/
 # Builds
 dist/
 dist-ssr/
-backend/.vercel/
-.vercel/
 
-# Environment variables
+# Environment variables / secrets
 .env
 .env.*
 !.env.example
 backend/.env
 backend/.env.*
 !backend/.env.example
+
+# Vercel
+.vercel/
+backend/.vercel/
 
 # Logs
 logs/
@@ -29,6 +31,7 @@ pnpm-debug.log*
 !.vscode/extensions.json
 .idea/
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj

@@ -1,37 +1,45 @@
-# Portfólio Jhullia Valentim — React
+# Portfólio — Jhullia Valentim
 
-Front-end do portfólio profissional migrado para React + Vite.
+Portfólio em React + Vite com certificados carregados por uma API serverless na Vercel e dados armazenados no Supabase.
 
-## Rodar localmente
+## Estrutura
+
+- `/src`: frontend React/Vite
+- `/backend/api`: Vercel Functions
+- `/backend/lib`: utilitários do backend e cliente Supabase
+
+## Frontend local
 
 ```bash
 npm install
 npm run dev
 ```
 
-## O que já está pronto
+Crie `.env` na raiz a partir de `.env.example` se quiser apontar o frontend para uma API específica.
 
-- React + Vite
-- Layout responsivo
-- Paleta clara, amigável e profissional
-- Sobre mim atualizado
-- React, Node.js, APIs REST, Oracle SQL, JavaScript, OutSystems, HTML/CSS e Git
-- Projetos: Fisioterapia, Orçamento Particular e Portal Comercial
-- Área separada de Certificações
-- Contato com e-mail, LinkedIn e GitHub
+## Deploy do frontend
 
-## Certificações
+No projeto Vercel do frontend:
 
-Por enquanto os certificados estão em:
+- Root Directory: `./`
+- Framework Preset: `Vite`
+- Build Command: `npm run build`
+- Output Directory: `dist`
 
-```text
-src/data/portfolioData.js
-```
+Depois que o backend estiver no ar, configure:
 
-Na próxima etapa, esse conteúdo será substituído por dados vindos de uma API Node.js conectada ao Supabase.
+`VITE_API_URL=https://SEU-BACKEND.vercel.app/api`
 
-Fluxo planejado:
+## Deploy do backend
 
-```text
-React → Node.js / API REST → Supabase
-```
+Crie um segundo projeto Vercel usando o mesmo repositório:
+
+- Root Directory: `backend`
+- Framework Preset: `Other`
+
+Environment Variables:
+
+- `SUPABASE_URL`
+- `SUPABASE_SECRET_KEY`
+
+Teste `/api/health` antes de `/api/certificados`.

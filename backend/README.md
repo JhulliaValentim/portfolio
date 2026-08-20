@@ -1,48 +1,42 @@
-# Backend do Portfólio - Jhullia Valentim
+# Backend do Portfólio — Vercel Functions
 
-API em Node.js + Express conectada ao Supabase.
+Este backend usa funções independentes da Vercel. Não inicia servidor Express.
 
 ## Rotas
 
-- `GET /`
 - `GET /api/health`
 - `GET /api/certificados`
 - `GET /api/certificados/:id`
 
-## Instalação
+## Variáveis de ambiente na Vercel
 
-```bash
-npm install
-```
+Configure no projeto do backend:
 
-Copie `.env.example` para `.env` e preencha:
+- `SUPABASE_URL`
+- `SUPABASE_SECRET_KEY`
 
-```env
-PORT=8080
-SUPABASE_URL=https://SEU-PROJETO.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=SUA_SERVICE_ROLE_KEY
-FRONTEND_URL=http://localhost:5173
-```
+A chave também pode ser fornecida como `SUPABASE_SERVICE_ROLE_KEY` para compatibilidade.
+Nunca envie a chave secreta para o GitHub.
 
-## Rodar
+## Deploy
 
-```bash
-npm run dev
-```
+No segundo projeto da Vercel, selecione o mesmo repositório do portfólio e configure:
 
-Teste:
+- Root Directory: `backend`
+- Framework Preset: `Other`
 
-```text
-http://localhost:8080/api/health
-http://localhost:8080/api/certificados
-```
+Não configure Output Directory.
 
-## Segurança
+Após o deploy, teste primeiro:
 
-A `SUPABASE_SERVICE_ROLE_KEY` é secreta e deve existir somente no backend.
-Nunca coloque essa chave no React nem envie o `.env` para o GitHub.
+`https://SEU-BACKEND.vercel.app/api/health`
 
-## Vercel
+Depois:
 
-O projeto já contém `api/index.js` e `vercel.json`.
-Cadastre na Vercel as variáveis `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` e `FRONTEND_URL`.
+`https://SEU-BACKEND.vercel.app/api/certificados`
+
+No projeto frontend da Vercel, crie:
+
+`VITE_API_URL=https://SEU-BACKEND.vercel.app/api`
+
+Depois faça um redeploy do frontend.
