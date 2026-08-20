@@ -1,4 +1,4 @@
-import { supabase } from "../config/supabase.js";
+import { getSupabase } from "../config/supabase.js";
 
 const CAMPOS_CERTIFICADO = `
   id,
@@ -19,18 +19,35 @@ const CAMPOS_CERTIFICADO = `
 `;
 
 export async function listarCertificados() {
+  const supabase = getSupabase();
+
   const { data, error } = await supabase
     .from("certificados")
     .select(CAMPOS_CERTIFICADO)
     .eq("ativo", true)
-    .order("ordem", { ascending: true })
-    .order("data_conclusao", { ascending: false, nullsFirst: false });
+    .order("ordem", {
+      ascending: true
+    })
+    .order("data_conclusao", {
+      ascending: false,
+      nullsFirst: false
+    });
 
-  if (error) throw error;
+  if (error) {
+    console.error(
+      "Erro do Supabase ao listar certificados:",
+      error
+    );
+
+    throw error;
+  }
+
   return data ?? [];
 }
 
 export async function buscarCertificadoPorId(id) {
+  const supabase = getSupabase();
+
   const { data, error } = await supabase
     .from("certificados")
     .select(CAMPOS_CERTIFICADO)
@@ -38,6 +55,14 @@ export async function buscarCertificadoPorId(id) {
     .eq("ativo", true)
     .maybeSingle();
 
-  if (error) throw error;
+  if (error) {
+    console.error(
+      "Erro do Supabase ao buscar certificado:",
+      error
+    );
+
+    throw error;
+  }
+
   return data;
 }
