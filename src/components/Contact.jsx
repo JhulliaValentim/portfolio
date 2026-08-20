@@ -10,7 +10,7 @@ export default function Contact() {
           </p>
 
           <div className="contact-actions">
-            <a className="button primary-button" href="mailto:jhulliavalentim.dev@gmail.com">Enviar e-mail</a>
+            <a className="button primary-button" href="mailto:jhulliavalentimp@gmail.com">Enviar e-mail</a>
             <a
               className="button secondary-button"
               href="https://www.linkedin.com/in/jhulliavalentim/"
