@@ -1,45 +1,46 @@
-# Portfólio — Jhullia Valentim
+# Portfólio
 
-Portfólio em React + Vite com certificados carregados por uma API serverless na Vercel e dados armazenados no Supabase.
+Projeto completo com frontend React/Vite e backend em Vercel Functions conectado ao Supabase.
 
-## Estrutura
+## Frontend
 
-- `/src`: frontend React/Vite
-- `/backend/api`: Vercel Functions
-- `/backend/lib`: utilitários do backend e cliente Supabase
-
-## Frontend local
+Na raiz:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Crie `.env` na raiz a partir de `.env.example` se quiser apontar o frontend para uma API específica.
+Para produção, configure no projeto frontend da Vercel:
 
-## Deploy do frontend
+```text
+VITE_API_URL=https://SEU-BACKEND.vercel.app/api
+```
 
-No projeto Vercel do frontend:
+## Backend
 
-- Root Directory: `./`
-- Framework Preset: `Vite`
-- Build Command: `npm run build`
-- Output Directory: `dist`
+O backend está em `backend/` e foi preparado para ser um segundo projeto na Vercel.
 
-Depois que o backend estiver no ar, configure:
+Configuração do projeto backend:
 
-`VITE_API_URL=https://SEU-BACKEND.vercel.app/api`
-
-## Deploy do backend
-
-Crie um segundo projeto Vercel usando o mesmo repositório:
-
-- Root Directory: `backend`
-- Framework Preset: `Other`
+```text
+Root Directory: backend
+Node: 22.x (definido em backend/package.json)
+```
 
 Environment Variables:
 
-- `SUPABASE_URL`
-- `SUPABASE_SECRET_KEY`
+```text
+SUPABASE_URL=https://SEU-PROJETO.supabase.co
+SUPABASE_SECRET_KEY=sb_secret_...
+```
 
-Teste `/api/health` antes de `/api/certificados`.
+Nunca envie a chave secreta para o GitHub.
+
+Rotas:
+
+```text
+GET /api/health
+GET /api/certificados
+GET /api/certificados/:id
+```

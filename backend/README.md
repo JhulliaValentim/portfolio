@@ -1,42 +1,34 @@
 # Backend do Portfólio — Vercel Functions
 
-Este backend usa funções independentes da Vercel. Não inicia servidor Express.
+Este backend usa funções independentes da Vercel. Não usa Express, `server.js`, `dotenv` ou `vercel.json`.
 
-## Rotas
+## Estrutura
 
-- `GET /api/health`
-- `GET /api/certificados`
-- `GET /api/certificados/:id`
+- `api/health.js` → `GET /api/health`
+- `api/certificados.js` → `GET /api/certificados`
+- `api/certificados/[id].js` → `GET /api/certificados/:id`
+- `lib/supabase.js` → cliente Supabase
+- `lib/cors.js` → CORS e validações HTTP
 
-## Variáveis de ambiente na Vercel
+## Vercel
 
-Configure no projeto do backend:
-
-- `SUPABASE_URL`
-- `SUPABASE_SECRET_KEY`
-
-A chave também pode ser fornecida como `SUPABASE_SERVICE_ROLE_KEY` para compatibilidade.
-Nunca envie a chave secreta para o GitHub.
-
-## Deploy
-
-No segundo projeto da Vercel, selecione o mesmo repositório do portfólio e configure:
+Crie um projeto separado para o backend usando o mesmo repositório e configure:
 
 - Root Directory: `backend`
-- Framework Preset: `Other`
+- Framework Preset: `Other` ou `Node` (sem Build Command e sem Output Directory)
 
-Não configure Output Directory.
+Environment Variables do projeto backend:
 
-Após o deploy, teste primeiro:
+- `SUPABASE_URL=https://SEU-PROJETO.supabase.co`
+- `SUPABASE_SECRET_KEY=sb_secret_...`
 
-`https://SEU-BACKEND.vercel.app/api/health`
+Depois do deploy, teste:
 
-Depois:
+- `https://SEU-BACKEND.vercel.app/api/health`
+- `https://SEU-BACKEND.vercel.app/api/certificados`
 
-`https://SEU-BACKEND.vercel.app/api/certificados`
+No projeto frontend, configure:
 
-No projeto frontend da Vercel, crie:
+- `VITE_API_URL=https://SEU-BACKEND.vercel.app/api`
 
-`VITE_API_URL=https://SEU-BACKEND.vercel.app/api`
-
-Depois faça um redeploy do frontend.
+Depois faça Redeploy do frontend.
